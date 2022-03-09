@@ -3,7 +3,9 @@
     <div class="modal" v-if="visible" @click.self="close">
 
       <div class="modal__content" :class="`modal__content--${size}`">
-        <button v-if="closeButton" class="modal__close" @click="close">Закрыть<base-icon class="ic-16 ml-4">close</base-icon></button>
+        <button v-if="closeButton" class="modal__close" @click="close">
+          <base-icon class="ic-16 ml-4">close</base-icon>
+        </button>
         <slot/>
       </div>
 
@@ -13,9 +15,11 @@
 
 <script>
 import Fade from "../transitions/Fade";
+import BaseIcon from "./BaseIcon";
+
 export default {
   name: "BaseModal",
-  components: {Fade},
+  components: {Fade, BaseIcon},
   props: {
     title: {
       type: String,
@@ -33,7 +37,7 @@ export default {
       type: String,
       default: "middle",
       validator: size =>
-        ["big", "middle", "small"].includes(size)
+        ["large", "big", "middle", "small"].includes(size)
     },
   },
   data: () => ({
@@ -45,6 +49,7 @@ export default {
       this.$modal.hide(this.name);
     },
     initModalService() {
+      this.$modal._registration(this.name);
       this.$modal.$event.$on("show", (name, payload) => {
         if (this.name === name) {
           this.payload = payload;
@@ -65,18 +70,36 @@ export default {
   },
   beforeMount() {
     this.initModalService();
-  }
+  },
+  beforeDestroy() {
+    this.$modal._unregistration(this.name);
+  },
 }
 </script>
 
 <style lang="scss" scoped>
+$modal--index: 100; // z-index
+
+$modal--border-radius--middle: 12px;
+$modal--border-radius--mini: 6px;
+
+$modal--max-width--large: 1800px;
+$modal--max-width--big: 1300px;
+$modal--max-width--middle: 1000px;
+$modal--max-width--small: 500px;
+
+$z-index: 100;
+$border-radius__middle: 12px;
+$border-radius__little: 6px;
+$max-width: 1300px;
+
 .modal {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: $z_modal;
+  z-index: $z-index;
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
@@ -91,12 +114,14 @@ export default {
     min-height: 100px;
     width: calc(95% - 48px);
 
-    &--big {max-width: $max-width}
-    &--middle {max-width: 1000px}
-    &--small {max-width: 500px}
+    &--large {max-width: $modal--max-width--large}
+    &--big {max-width: $modal--max-width--big}
+    &--middle {max-width: $modal--max-width--middle}
+    &--small {max-width: $modal--max-width--small}
   }
 
   &__close {
+    border: none;
     position: absolute;
     top: 24px;
     right: 24px;

@@ -1,11 +1,23 @@
 {
-  "name": "modal-service",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-modal-service",
+  "description": "Simple modal service for vuejs",
+  "version": "1.0.1",
+  "private": false,
+  "keywords": ["vue", "vuejs", "dialog", "modal", "vue-modal-service", "vue modal service", "vue-modal"],
+  "author": {
+    "name": "Bazarbayev abylay",
+    "email": "Bazarbayev.abylay@gmail.com"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "./dist/modal-service.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-library" : "vue-cli-service build --target lib --name modal-service ./src/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -18,6 +30,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "sass": "^1.49.9",
+    "sass-loader": "^10",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

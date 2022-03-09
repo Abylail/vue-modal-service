@@ -1,24 +1,36 @@
-# modal-service
+# vue-modal-service
 
-## Project setup
+## Install
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+npm i vue-modal-service
 ```
 
-### Compiles and minifies for production
+## Quick Start
 ```
-npm run build
+import it to global css
+
+@import "~vue-modal-service/dist/modal-service.css";
+
+OR
+
+(for NUXT)
+css: [
+    "vue-modal-service/dist/modal-service.css",
+  ],
+```
+```
+import Vue from 'vue';
+import ModalService from 'vue-modal-service';
+
+Vue.use(ModalService);
 ```
 
-### Lints and fixes files
+## How to use
 ```
-npm run lint
+<modal name="some-modal-name" size="middle" close-button>
+    <div>hey</div>
+</modal>
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+this.$modal.show('some-modal-name');
+```
