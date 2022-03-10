@@ -1,12 +1,16 @@
 {
   "name": "vue-modal-service",
   "description": "Simple modal service for vuejs",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": false,
   "keywords": ["vue", "vuejs", "dialog", "modal", "vue-modal-service", "vue modal service", "vue-modal"],
   "author": {
     "name": "Bazarbayev abylay",
     "email": "Bazarbayev.abylay@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Abylail/vue-modal-service.git"
   },
   "files": [
     "dist",

@@ -6,7 +6,7 @@
         <button v-if="closeButton" class="modal__close" @click="close">
           <base-icon class="ic-16 ml-4">close</base-icon>
         </button>
-        <slot/>
+        <slot :payload="payload"/>
       </div>
 
     </div>
