@@ -4,8 +4,12 @@
 
       <div class="modal__content" :class="`modal__content--${size}`">
         <button v-if="closeButton" class="modal__close" @click="close">
-          <base-icon class="ic-16 ml-4">close</base-icon>
+          <svg class="ic-16" fill="none" viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.47 4.03c.26.26.26.682 0 .942l-8 8a.667.667 0 0 1-.943-.943l8-8c.26-.26.683-.26.943 0z" fill="#111"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.527 4.03c.26-.261.683-.261.943 0l8 8a.667.667 0 1 1-.943.942l-8-8a.667.667 0 0 1 0-.943z" fill="#111"/>
+          </svg>
         </button>
+
         <slot :payload="payload"/>
       </div>
 
@@ -15,11 +19,10 @@
 
 <script>
 import Fade from "../transitions/Fade";
-import BaseIcon from "./BaseIcon";
 
 export default {
   name: "BaseModal",
-  components: {Fade, BaseIcon},
+  components: {Fade},
   props: {
     title: {
       type: String,
@@ -133,6 +136,11 @@ $max-width: 1300px;
     display: flex;
     align-items: center;
     &:active {opacity: .7}
+    svg {
+      height: 16px;
+      min-width: 16px;
+      width: 16px;
+    }
   }
 
 }

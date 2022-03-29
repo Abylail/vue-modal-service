@@ -34,6 +34,11 @@ Creating modal
 </modal>
 ```
 ---
+Available sizes
+```
+large|big|middle|small
+```
+---
 Show modal
 ```
 this.$modal.show('some-modal-name');
