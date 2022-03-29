@@ -1,40 +1,40 @@
 const service = {
     install(Vue) {
         this.event = new Vue();
-
-        Vue.prototype.$modal = {
+        const modalService = {
             $active: null,
             $availableModals: [],
             $payload: null,
             $event: this.event,
-            show(modalName, payload=null, save=true) {
-                if (modalName === this.$active) return;
-                if (save && this.$active) {
-                    this._queue.push(this.$active);
-                    this.hide(this.$active, false);
+            show: (modalName, payload=null, save=true) => {
+                if (modalName === modalService.$active) return;
+                if (save && modalService.$active) {
+                    modalService._queue.push(modalService.$active);
+                    modalService.hide(modalService.$active, false);
                 }
                 service.event.$emit("show", modalName, payload);
-                this.$active = modalName;
-                this.$payload = payload;
+                modalService.$active = modalName;
+                modalService.$payload = payload;
             },
-            hide(modalName, showLast = true) {
+            hide: (modalName, showLast = true) => {
                 service.event.$emit("hide", modalName);
-                this.$active = null;
-                this.$payload = null;
-                if (showLast && this._queue.length) {
-                    this.show(this._queue.pop());
+                modalService.$active = null;
+                modalService.$payload = null;
+                if (showLast && modalService._queue.length) {
+                    modalService.show(modalService._queue.pop());
                 }
             },
-            _registration(modalName) {
-                if (!this.$availableModals.includes(modalName))
-                    this.$availableModals.push(modalName);
+            _registration: (modalName) => {
+                if (!modalService.$availableModals.includes(modalName))
+                    modalService.$availableModals.push(modalName);
             },
-            _unregistration(modalName) {
-                if (this.$availableModals.includes(modalName))
-                    this.$availableModals.splice(this.$availableModals.indexOf(modalName, 1));
+            _unregistration: (modalName) => {
+                if (modalService.$availableModals.includes(modalName))
+                    modalService.$availableModals.splice(modalService.$availableModals.indexOf(modalName, 1));
             },
             _queue: [],
         }
+        Vue.prototype.$modal = modalService;
     }
 }
 
