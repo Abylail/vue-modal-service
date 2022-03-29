@@ -52,6 +52,12 @@ Hide modal
 ```
 this.$modal.hide('some-modal-name');
 ```
+---
+Emits
+```
+<modal @onShow="someMethod" ...
+<modal @onHide="someMethod" ...
+```
 
 ## How to debug
 Available modals
