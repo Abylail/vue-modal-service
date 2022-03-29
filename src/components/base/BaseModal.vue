@@ -57,7 +57,7 @@ export default {
         if (this.name === name) {
           this.payload = payload;
           this.visible = true;
-          document.body.style.overflow = "hidden";
+          document.body.style.position = "absolute";
           this.$emit("onShow", payload);
         }
       });
@@ -65,7 +65,7 @@ export default {
         if (this.name === name) {
           this.visible = false;
           this.payload = {};
-          document.body.style.overflow = null;
+          document.body.style.position = null;
           this.$emit("onHide");
         }
       });
