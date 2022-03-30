@@ -51,28 +51,41 @@ export default {
     close() {
       this.$modal.hide(this.name);
     },
+    innerOpen(payload) {
+      this.payload = payload;
+      this.visible = true;
+      document.body.style.overflow = "hidden";
+      document.body.style.maxHeight = "100vh";
+      this.$emit("onShow", payload);
+    },
+    innerClose() {
+      this.visible = false;
+      this.payload = {};
+      document.body.style.overflow = null;
+      document.body.style.maxHeight = null;
+      this.$emit("onHide");
+    },
     initModalService() {
       this.$modal._registration(this.name);
       this.$modal.$event.$on("show", (name, payload) => {
         if (this.name === name) {
-          this.payload = payload;
-          this.visible = true;
-          document.body.style.position = "absolute";
-          this.$emit("onShow", payload);
+          this.innerOpen(payload);
         }
       });
       this.$modal.$event.$on("hide", name => {
         if (this.name === name) {
-          this.visible = false;
-          this.payload = {};
-          document.body.style.position = null;
-          this.$emit("onHide");
+          this.innerClose();
         }
       });
     }
   },
   beforeMount() {
     this.initModalService();
+  },
+  mounted() {
+    if (this.$modal.$active === this.name) {
+      this.innerOpen(this.$modal.$payload);
+    }
   },
   beforeDestroy() {
     this.$modal._unregistration(this.name);

@@ -1,7 +1,7 @@
 {
   "name": "vue-modal-service",
   "description": "Simple modal service for vuejs",
-  "version": "1.2.5",
+  "version": "1.3.0",
   "private": false,
   "keywords": ["vue", "vuejs", "dialog", "modal", "vue modal", "vue-modal-service", "vue modal service", "vue-modal"],
   "author": {
